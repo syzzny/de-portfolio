@@ -1,0 +1,2 @@
+$bp-m: 800px;
+@mixin mobile { @media (max-width: $bp-m) { @content; } }

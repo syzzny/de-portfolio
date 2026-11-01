@@ -1,0 +1,6 @@
+@use '../../styles/mixins' as *;
+.header { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 48px; color: #fff; mix-blend-mode: difference; pointer-events: none; a { pointer-events: auto; } @include mobile { padding: 0 20px; mix-blend-mode: normal; color: #0b0b0d; background: rgba(244, 244, 244, 0.88); backdrop-filter: blur(10px); height: 60px; } }
+.logo { font-weight: 600; font-size: 15px; letter-spacing: 0.14em; }
+.nav { display: flex; gap: 36px; font-size: 14px; @include mobile { gap: 20px; } }
+
+:global([data-view='detail']) .header { mix-blend-mode: normal; color: #0b0b0d; background: #f4f4f5; box-shadow: 0 1px 0 rgba(10, 10, 12, 0.08); }

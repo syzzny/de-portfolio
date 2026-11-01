@@ -1,0 +1,10 @@
+.art { position: relative; width: 100%; height: 100%; overflow: hidden; background: linear-gradient(160deg, var(--bg1), var(--bg2)); box-shadow: 0 0 0 1px rgba(10, 10, 12, 0.08) inset; }
+.img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; user-select: none; }
+.hi { opacity: 0; transition: opacity 0.35s; }
+:global([data-hi]) .hi { opacity: 1; }
+.ph { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 8%; color: var(--fg); }
+.glow { position: absolute; left: 50%; top: 30%; width: 90%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--glow), transparent 65%); filter: blur(6px); }
+.kind { position: relative; font-family: var(--font-mono); font-size: max(9px, 0.7vw); letter-spacing: 0.02em; opacity: 0.6; }
+.name { position: relative; white-space: nowrap; font-weight: 500; font-size: clamp(14px, 2vw, 34px); letter-spacing: -0.04em; line-height: 1; }
+.art[data-kind='screen'] .ph, .art[data-kind='banner'] .ph { flex-direction: row; align-items: flex-end; }
+.art[data-kind='banner'] .name, .art[data-kind='square'] .name, .art[data-kind='screen'] .name { font-size: clamp(12px, 1.6vw, 26px); }

@@ -1,0 +1,48 @@
+@use '../../styles/mixins' as *;
+.top { align-items: center; }
+.h1 { font-size: 8vw !important; word-break: keep-all !important; @include mobile { font-size: 11vw !important; } }
+.desc { max-width: 520px; font-size: 15px; line-height: 1.8; opacity: 0.7; }
+.shot { max-width: none !important; aspect-ratio: 16 / 10 !important; justify-self: stretch !important; }
+.live { display: inline-block; margin-top: 10px; padding: 14px 24px; border-radius: 999px; background: #0a0a0c; color: #fff; font-size: 14px; font-weight: 500; transition: background 0.3s; &:hover { background: var(--accent); } }
+
+/* 좌: 고정 제목 / 우: 항목 목록 */
+.split { display: grid; grid-template-columns: 0.8fr 1.7fr; gap: 6vw; @include mobile { grid-template-columns: 1fr; gap: 36px; } }
+.side { align-self: start; position: sticky; top: 120px; @include mobile { position: static; }
+  h2 { font-weight: 500; font-size: 7vw; line-height: 0.95; letter-spacing: -0.06em; margin: 14px 0 22px; @include mobile { font-size: 18vw; } }
+  p { font-size: 15px; line-height: 1.7; opacity: 0.6; } }
+.k { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--accent); }
+
+.list { border-top: 1px solid currentColor; }
+.row { display: grid; grid-template-columns: 56px 1fr; column-gap: 8px; row-gap: 14px; padding: 36px 0 40px; border-bottom: 1px solid rgba(10, 10, 12, 0.18); transition: padding-left 0.4s;
+  .n { grid-row: 1 / span 2; padding-top: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--accent); }
+  h3 { font-weight: 500; font-size: clamp(26px, 3.1vw, 48px); line-height: 1.15; letter-spacing: -0.05em; }
+  p { max-width: 560px; font-size: 16px; line-height: 1.85; opacity: 0.68; }
+  &:hover { padding-left: 16px; }
+  @include mobile { grid-template-columns: 36px 1fr; padding: 26px 0 30px; } }
+
+/* 디자인(어두운 밴드) / 기술(밝은 밴드)로 배경을 번갈아 */
+.band { margin: 0 -48px; padding: 10vw 48px; @include mobile { margin: 0 -20px; padding: 20vw 20px; } }
+.dark { background: #0a0a0c; color: #fff;
+  .list { border-color: rgba(255, 255, 255, 0.5); }
+  .row { border-color: rgba(255, 255, 255, 0.16); .n { color: #8ea2ff; } p { opacity: 0.6; } }
+  .k { color: #8ea2ff; } }
+.light { background: #fff; color: #0a0a0c; }
+
+/* 디자인 과정 · 반응형 갤러리 */
+.gal { margin-top: 9vw; @include mobile { margin-top: 18vw; } }
+.gh { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; font-weight: 500; font-size: clamp(22px, 2.4vw, 36px); letter-spacing: -0.05em;
+  small { font-family: var(--font-mono); font-size: 12px; font-weight: 400; letter-spacing: 0.08em; opacity: 0.5; } }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; align-items: start; @include mobile { grid-template-columns: 1fr; gap: 20px; } }
+.fig { margin: 0; min-width: 0;
+  img { display: block; width: 100%; height: auto; border-radius: 6px; background: rgba(127, 127, 127, 0.12); }
+  figcaption { display: flex; gap: 12px; margin-top: 12px; font-size: 13px; line-height: 1.6; opacity: 0.6;
+    b { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--accent); padding-top: 2px; } }
+  &[data-wide] { grid-column: 1 / -1; } }
+.dark .fig img { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1); }
+.dark .fig figcaption b { color: #8ea2ff; }
+.light .fig img { box-shadow: 0 0 0 1px rgba(10, 10, 12, 0.08); }
+
+/* 모바일 · 태블릿 — 세로로 긴 화면은 가로로 나란히 */
+.phones { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start;
+  .fig { flex: 0 1 auto; width: min(100%, 320px); &[data-wide] { flex-basis: 100%; width: 100%; } }
+  .fig img { border-radius: 14px; } }

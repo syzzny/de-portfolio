@@ -1,0 +1,19 @@
+@use '../../styles/mixins' as *;
+.room { background: #fff; padding: 14vw 48px 10vw; @include mobile { padding: 24vw 20px 16vw; } }
+.head { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 48px; margin-bottom: 8vw;
+  h2 { font-weight: 500; font-size: 6vw; line-height: 1.02; letter-spacing: -0.05em; }
+  p { justify-self: end; max-width: 380px; font-size: 15px; line-height: 1.8; opacity: 0.65; }
+  @include mobile { grid-template-columns: 1fr; h2 { font-size: 11vw; } p { justify-self: start; } } }
+.no { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--accent); }
+.site { & + & { margin-top: 10vw; } }
+.frame { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--wall); will-change: clip-path; }
+.inner { width: 100%; height: 100%; will-change: transform; }
+.meta { display: grid; grid-template-columns: 1.1fr 1.4fr 1fr; gap: 48px; align-items: start; margin-top: 28px; @include mobile { grid-template-columns: 1fr; gap: 20px; } }
+.idx { display: block; margin-bottom: 14px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: var(--accent); }
+.meta h3 { font-weight: 500; font-size: 3.2vw; line-height: 1; letter-spacing: -0.04em; @include mobile { font-size: 9vw; } }
+.meta em { display: block; margin-top: 10px; font-style: normal; font-size: 14px; opacity: 0.5; }
+.desc { font-size: 15px; line-height: 1.8; opacity: 0.7; }
+.facts { display: grid; gap: 14px; div { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding-top: 14px; border-top: 1px solid rgba(10, 10, 12, 0.12); } dt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; opacity: 0.5; padding-top: 3px; } dd { font-size: 14px; } }
+
+.meta h3 a { color: inherit; }
+.more { display: inline-block; margin-top: 22px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; padding-bottom: 4px; border-bottom: 1px solid currentColor; }

@@ -1,0 +1,15 @@
+:root {
+  --ink: #0a0a0c; --wall: #f4f4f5; --accent: #2b4bff;
+  --font-sans: 'Geist Variable', 'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body { word-break: keep-all; background: #fff; color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+@media (hover: hover) and (pointer: fine) { body, a, button { cursor: none; } }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }

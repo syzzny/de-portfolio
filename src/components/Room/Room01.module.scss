@@ -1,0 +1,15 @@
+@use '../../styles/mixins' as *;
+.room { background: var(--wall); padding: 14vw 48px 12vw; @include mobile { padding: 24vw 20px; } }
+.head { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 48px; margin-bottom: 8vw;
+  h2 { font-weight: 500; font-size: 6vw; line-height: 1.02; letter-spacing: -0.05em; }
+  p { justify-self: end; max-width: 380px; font-size: 15px; line-height: 1.8; opacity: 0.65; }
+  @include mobile { grid-template-columns: 1fr; h2 { font-size: 11vw; } p { justify-self: start; } } }
+.no { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--accent); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6vw 24px; align-items: start; @include mobile { grid-template-columns: 1fr 1fr; } }
+.plate { &[data-i='1'], &[data-i='4'] { margin-top: 8vw; @include mobile { margin-top: 0; } } }
+.link { display: block; }
+.frame { aspect-ratio: 860 / 1100; overflow: hidden; background: #ddd; will-change: transform; box-shadow: 0 2.2vw 4.4vw -1.2vw rgba(10, 10, 12, 0.18); }
+.cap { display: flex; align-items: baseline; gap: 12px; margin-top: 20px; font-size: 15px;
+  b { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: var(--accent); }
+  b { white-space: nowrap; } span { font-weight: 500; } em { margin-left: auto; font-style: normal; font-size: 13px; opacity: 0.5; }
+  @include mobile { flex-wrap: wrap; gap: 4px 10px; margin-top: 14px; font-size: 14px; em { margin-left: 0; flex-basis: 100%; font-size: 12px; } } }
