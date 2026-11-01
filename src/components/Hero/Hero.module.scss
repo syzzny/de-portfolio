@@ -1,14 +1,16 @@
 @use '../../styles/mixins' as *;
+// 폰 + 세로로 긴 화면(태블릿 세로)에서는 가운데 카드 하나만 크게 보여주는 구도로
+@mixin compact { @media (max-width: 800px), (max-aspect-ratio: 102/100) { @content; } }
 .hero { position: relative; background: #fff; }
-.stage { position: relative; width: 100%; height: 100vh; min-height: 640px; overflow: hidden; --u: min(1vw, 1.6vh); --oy: calc(41 * var(--u)); @include mobile { --u: min(2.4vw, 1.6vh); --oy: calc(35 * var(--u)); } }
+.stage { position: relative; width: 100%; height: 100vh; min-height: 640px; overflow: hidden; --u: min(1vw, 1.6vh); --oy: calc(41 * var(--u)); @include compact { --u: min(2.4vw, 1.6vh); --oy: calc(35 * var(--u)); } @media (max-width: 800px) { --oy: calc(44 * var(--u)); } }
 .wall { position: absolute; inset: 0; background: var(--wall); }
-.meta { position: absolute; left: 3.4vw; top: calc(5.2 * var(--u)); z-index: 1; font-family: var(--font-mono); font-size: max(10px, calc(0.75 * var(--u))); letter-spacing: 0.08em; opacity: 0.55; @include mobile { top: calc(7 * var(--u)); left: 20px; } }
-.title { position: absolute; left: 3.3vw; top: calc(8.4 * var(--u)); z-index: 1; font-weight: 500; font-size: calc(6 * var(--u)); line-height: 1.12; letter-spacing: -0.045em; @include mobile { top: calc(9 * var(--u)); left: 18px; font-size: calc(4 * var(--u)); line-height: 1; } }
-.intro { position: absolute; right: 3.3vw; top: calc(10.6 * var(--u)); z-index: 1; width: calc(22 * var(--u)); font-size: max(13px, calc(1.05 * var(--u))); line-height: 1.75; opacity: 0.65; @include mobile { display: none; } }
+.meta { position: absolute; left: 3.4vw; top: calc(5.2 * var(--u)); z-index: 1; font-family: var(--font-mono); font-size: max(10px, calc(0.75 * var(--u))); letter-spacing: 0.08em; opacity: 0.55; @include compact { top: calc(7.6 * var(--u)); left: 20px; } }
+.title { position: absolute; left: 3.3vw; top: calc(8.4 * var(--u)); z-index: 1; font-weight: 500; font-size: calc(6 * var(--u)); line-height: 1.12; letter-spacing: -0.045em; @include compact { top: calc(10.2 * var(--u)); left: 18px; font-size: calc(4 * var(--u)); line-height: 1; } }
+.intro { position: absolute; right: 3.3vw; top: calc(10.6 * var(--u)); z-index: 1; width: calc(22 * var(--u)); font-size: max(13px, calc(1.05 * var(--u))); line-height: 1.75; opacity: 0.65; @include compact { display: none; } }
 .mask { display: block; overflow: hidden; padding-bottom: 0.08em; > span { display: block; } }
 
-.item { position: absolute; left: calc(50% + var(--x) * var(--u)); top: calc(var(--oy) + var(--y) * var(--u)); width: calc(var(--w) * var(--u)); height: calc(var(--h) * var(--u)); }
-.item:not([data-main]) { @include mobile { display: none; } }
+.item { position: absolute; left: calc(50% + var(--x) * var(--u)); top: calc(var(--oy) + var(--y) * var(--u)); width: calc(var(--w) * var(--u) * var(--k, 1)); height: calc(var(--h) * var(--u) * var(--k, 1)); @media (max-width: 800px) { &[data-main] { --k: 1.35; } } }
+.item:not([data-main]) { @include compact { display: none; } }
 .tilt { position: relative; width: 100%; height: 100%; }
 .art { width: 100%; height: 100%; box-shadow: 0 calc(2.2 * var(--u)) calc(4.4 * var(--u)) calc(-1.2 * var(--u)) rgba(10, 10, 12, 0.18); }
 .label { position: absolute; left: 0; top: calc(100% + calc(0.8 * var(--u))); display: flex; align-items: baseline; gap: calc(0.7 * var(--u)); white-space: nowrap; font-size: max(10px, calc(0.78 * var(--u))); line-height: 1;

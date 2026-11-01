@@ -26,6 +26,7 @@ export default function Hero() {
     gsap.config({ force3D: false });
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let onMove;
+    let safety;
 
     const ctx = gsap.context(() => {
       const $ = gsap.utils.selector(stage);
@@ -39,18 +40,21 @@ export default function Hero() {
       const others = items.slice(1);
       const el = stage.current;
       // 화면 비율이 달라도 구도가 잘리지 않도록 폭/높이 중 작은 쪽 기준 단위(u). CSS의 --u 와 동일
-      const mob = window.innerWidth <= 800;
+      const mob = window.innerWidth <= 800 || window.innerHeight > window.innerWidth * 1.02; // 폰 · 태블릿 세로
       const u = () => (mob ? Math.min(window.innerWidth / 41.67, window.innerHeight / 62.5) : Math.min(window.innerWidth / 100, window.innerHeight / 62.5));
-      const OY = mob ? 35 : 42;
+      const OY = window.innerWidth <= 800 ? 42 : mob ? 35 : 42;
 
       gsap.set(items, { xPercent: -50, yPercent: -50 });
 
       // 1) 입장
-      gsap.timeline({ defaults: { ease: 'power4.out' } })
+      const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+      intro
         .from(lines, { yPercent: 110, duration: 1.3, stagger: 0.12 }, 0.1)
         .from(arts, { y: 70, opacity: 0, scale: 0.94, duration: 1.4, stagger: { each: 0.09, from: 'center' } }, 0.2)
         .from(labels, { opacity: 0, y: 8, duration: 0.8, stagger: 0.06 }, 0.9)
         .from(fades, { opacity: 0, y: 14, duration: 1, stagger: 0.1 }, 0.8);
+      // 일부 브라우저(모바일 사파리 등)에서 첫 로드 때 애니메이션이 멈춰 화면이 비어 보이는 경우를 막는 안전장치
+      safety = setTimeout(() => { if (intro.progress() < 1) intro.progress(1); }, 3200);
       if (reduce) return;
 
       // 2) 마우스 패럴랙스 — 깊이가 클수록 많이 움직임
@@ -96,7 +100,7 @@ export default function Hero() {
         ;
     }, stage);
 
-    return () => { if (onMove) window.removeEventListener('mousemove', onMove); ctx.revert(); };
+    return () => { clearTimeout(safety); if (onMove) window.removeEventListener('mousemove', onMove); ctx.revert(); };
   }, []);
 
   return (
